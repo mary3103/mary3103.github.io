@@ -186,10 +186,11 @@ a{ color:inherit; text-decoration:none; }
 .constraint p + p{ margin-top:16px; font-size:15px; font-weight:400; line-height:1.75; color:#c7c7cc; letter-spacing:-0.011em; max-width:56ch; }
 
 /* 결과 */
-.results{ display:grid; grid-template-columns:repeat(3,1fr); column-gap:clamp(24px,4vw,56px); margin-top:40px; border-top:1px solid var(--ink); }
+.results{ display:grid; grid-template-columns:repeat(4,1fr); column-gap:clamp(24px,4vw,56px); margin-top:40px; border-top:1px solid var(--ink); }
 .results div{ padding:24px 0 0; }
-.results strong{ display:block; font-size:clamp(24px,3vw,36px); font-weight:700; letter-spacing:-0.035em; line-height:1.2; }
+.results strong{ display:block; font-size:clamp(22px,2.4vw,30px); font-weight:700; letter-spacing:-0.035em; line-height:1.2; }
 .results span{ display:block; margin-top:8px; font-size:15px; line-height:1.65; color:var(--grey); }
+@media (max-width:1100px) and (min-width:861px){ .results{ grid-template-columns:repeat(2,1fr); row-gap:28px; } }
 
 /* 돌아보며 */
 .retro{ display:grid; grid-template-columns:minmax(120px,180px) 1fr; gap:clamp(24px,5vw,72px); }
@@ -427,6 +428,7 @@ a{ color:inherit; text-decoration:none; }
           <h3>색, 선, 굵기로 정보 계층 정리</h3>
           <p>헤더는 진한 바로, 선택한 행은 굵기와 배경색으로 구분했습니다. 매체 형태가 바뀌는 지점은 배경색을 바꾸고 구분선을 실선에서 점선으로, 외부 언론사와 자사 매체 사이는 더 굵은 실선으로 나눴습니다. 행마다 있던 장식용 아이콘은 없애고 매체명만 남겼습니다.</p>
           <p class="try">옆 화면의 표를 스크롤해 보세요 →</p>
+          
         </li>
         <li>
           <h3>모든 행에 매체 형태 표시</h3>
@@ -471,7 +473,7 @@ a{ color:inherit; text-decoration:none; }
             <div class="live__scroll"><img src="img/table-mid.webp" width="820" height="11638" alt="매체 목록 전체" loading="lazy"></div>
             <img src="img/table-bot.webp" width="820" height="358" alt="패키지 비용과 안내 문구">
           </div>
-          <img src="img/after-mo-preview.webp" width="485" height="987" alt="매체를 누르면 화면 위에 뜨는 게재 위치 미리보기" data-for="after" data-go="before" hidden loading="lazy">
+          <img src="img/after-mo-preview.webp" width="485" height="987" alt="매체를 누르면 화면 위에 뜨는 게재 위치 미리보기" data-for="after" data-go="before" hidden loading="lazy" style="background:#525252;">
         </div>
       </div>
       <p class="legend"><b>- - -</b> 매체 형태가 바뀌는 지점 &nbsp; <b>───</b> 외부 언론사와 자사 매체의 경계<br>빨간 선은 설명을 위해 덧붙인 표시입니다</p>
@@ -483,8 +485,9 @@ a{ color:inherit; text-decoration:none; }
   <h2 class="sec__title">결과</h2>
   <div class="results">
     <div><strong>11종 적용</strong><span>모든 견적서를 같은 구조로 개편</span></div>
-    <div><strong>휴대폰에서 바로 확인</strong><span>링크로 전달되어 예비 광고주가 이미지와 미리보기를 그대로 볼 수 있게 됨</span></div>
-    <div><strong>퇴사 시점까지 사용</strong><span>예비 광고주 응대에 계속 쓰임</span></div>
+    <div><strong>휴대폰으로 확인</strong><span>링크로 전달되어 예비 광고주가 이미지와 미리보기를 그대로 볼 수 있게 됨</span></div>
+    <div><strong>두 경로로 접속</strong><span>링크와 사내 홈페이지 어디서든 열 수 있게 함</span></div>
+    <div><strong>퇴사 때까지 사용</strong><span>예비 광고주 응대에 계속 쓰임</span></div>
   </div>
 </section>
 
@@ -493,13 +496,12 @@ a{ color:inherit; text-decoration:none; }
   <div class="collab">
     <div>
       <h3>마케팅팀</h3>
-      <p>견적서를 매일 쓰며 예비 광고주에게 직접 설명하는 팀입니다. 실제 사용자인 만큼 마케팅팀의 의견을 중심으로 디자인 방향을 정했고, 필요한 기능(공유, 데이터 구분 강화)도 함께 확인했습니다. 익숙한 구조가 바뀌는 것을 원하지 않아 표 배치는 PC와 같게 두었습니다.</p>
+      <p>견적서를 매일 쓰며 예비 광고주에게 직접 설명하는 팀입니다. 실제 사용자인 만큼 마케팅팀의 의견을 중심으로 디자인 방향을 정했고, 필요한 기능(공유, 데이터 구분 강화)도 함께 확인했습니다. 익숙한 구조가 바뀌는 것을 원하지 않아 표 배치는 개편 전 구조와 같게 두었습니다.</p>
     </div>
     <div>
       <h3>개발팀</h3>
-      <p>외부 서버로 접속하면 검색과 다운로드 기능이 보이지 않고, 사내에서는 검색할 수 있도록 개발팀이 접속 위치에 따라 기능을 나눴습니다.</p>
+      <p>화면과 동작은 제가 만들고, 언론사 목록이 들어갈 자리는 변수로 비워 개발팀에 넘겼습니다. 개발팀이 서버를 연결해 언론사, 코드, 형태를 불러오고, 외부 접속 시 검색과 다운로드 기능을 숨기는 작업과 마케팅팀이 요청한 HTML 다운로드 기능을 붙였습니다. 함께 동작을 확인한 뒤 마케팅팀에 링크를 전달했습니다.</p>
     </div>
-    <!-- TODO 개발팀: 링크 전달/외부 접속 분기 작업에서 개발팀과 어떻게 협업했는지 내용 확인 후 추가 -->
   </div>
 </section>
 
