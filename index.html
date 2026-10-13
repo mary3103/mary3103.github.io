@@ -16,6 +16,9 @@
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@1,300&display=swap&text=theMockup">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
 <style>
@@ -93,18 +96,36 @@ a{ color:inherit; text-decoration:none; }
    4. 히어로 — 이 페이지의 유일한 연출 지점
    ─────────────────────────────────────────── */
 .hero{
-  padding-top:clamp(140px,18vh,200px);
-  padding-bottom:clamp(64px,9vh,110px);
+  min-height:100svh;
+  display:flex; flex-direction:column;
+  padding-top:clamp(96px,14vh,140px);
+  padding-bottom:clamp(28px,5vh,48px);
 }
 .hero__head{
-  font-size:clamp(34px,6.4vw,82px);
-  font-weight:700;
-  line-height:1.16;
-  letter-spacing:-0.042em;
-  margin:0;
+  margin:auto 0;
+  font-size:clamp(56px,11.6vw,184px);
+  line-height:.86;
+  letter-spacing:-0.055em;
+  position:relative;
+  padding-bottom:.06em;
 }
-/* 마스크 리빌: 각 행이 아래에서 밀려 올라옴 */
-.line{ display:block; overflow:hidden; padding-bottom:.08em; }
+/* 기준선: 디자인 툴의 가이드처럼 두 번째 줄 아래를 가로지름 */
+.hero__head::after{
+  content:""; position:absolute; left:0; right:0; bottom:.14em;
+  height:1px; background:var(--line);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 1.2s var(--ease) .35s;
+}
+.is-ready .hero__head::after{ transform:scaleX(1); }
+.hero__a{ font-weight:800; }
+/* the Mockup: 가늘고 기울어진 글자 = 아직 '시안' */
+.hero__b{
+  font-family:"Inter", "Pretendard Variable", sans-serif;
+  font-style:italic; font-weight:300;
+  letter-spacing:-0.06em;
+}
+/* 마스크 리빌: 각 행이 아래에서 밀려 올라옴 (기울임 글자가 잘리지 않게 좌우 여유) */
+.line{ display:block; overflow:hidden; padding:0 .08em .1em 0; margin-right:-.08em; }
 .line > span{
   display:block;
   transform:translateY(112%);
@@ -112,19 +133,33 @@ a{ color:inherit; text-decoration:none; }
 }
 .line:nth-child(2) > span{ transition-delay:.1s; }
 .is-ready .line > span{ transform:translateY(0); }
+.line--b{ padding-left:14%; }
+.hero__b{ white-space:nowrap; }
 
-.hero__sub{
-  margin:clamp(26px,4vh,40px) 0 0;
-  max-width:43ch;
-  font-size:clamp(15px,1.5vw,19px);
-  line-height:1.65;
-  color:var(--grey);
-  opacity:0;
-  transform:translateY(14px);
-  transition:opacity .9s var(--ease) .45s, transform .9s var(--ease) .45s;
+/* 커서: 곧게 선 막대 — 기울어진 시안 옆에서 '지금 만드는 중' */
+.caret{
+  display:inline-block; width:.045em; height:.74em;
+  margin-left:.08em; vertical-align:-.02em;
+  background:var(--ink);
+  animation:caret 1.06s steps(1) infinite;
 }
-.is-ready .hero__sub{ opacity:1; transform:none; }
-.hero__sub b{ display:block; margin-top:4px; }
+@keyframes caret{ 50%{ opacity:0 } }
+
+.hero__foot{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:16px 32px; flex-wrap:wrap;
+  opacity:0; transform:translateY(10px);
+  transition:opacity .9s var(--ease) .6s, transform .9s var(--ease) .6s;
+}
+.is-ready .hero__foot{ opacity:1; transform:none; }
+.hero__ko{ margin:0; font-size:clamp(15px,1.3vw,18px); font-weight:600; letter-spacing:-0.02em; }
+.hero__meta{ margin:0; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--grey); }
+.hero__meta span{ margin:0 .7em; color:var(--line); }
+@media (max-width:640px){
+  .hero{ min-height:78svh; padding-top:96px; padding-bottom:32px; }
+  .hero__foot{ margin-top:32px; }
+  .hero__head{ font-size:clamp(44px,15.6vw,96px); }
+  .line--b{ padding-left:8%; }
+}
 
 /* ───────────────────────────────────────────
    5. 작업물 — 카드가 아닌 전면 행(row) 구조
@@ -439,7 +474,9 @@ a{ color:inherit; text-decoration:none; }
     animation-duration:.01ms !important;
   }
   .line > span{ transform:none; }
-  .hero__sub{ opacity:1; transform:none; }
+  .hero__foot{ opacity:1; transform:none; }
+  .hero__head::after{ transform:none; }
+  .caret{ animation:none !important; }
   /* 회전 정지 — 0.01ms로 무한 반복시키지 않고 아예 끈 뒤 정지 구도로 고정 */
   .orb, .orb img{ animation:none !important; }
   .orb--2{ z-index:9 } .orb--1, .orb--3{ z-index:4 }
@@ -468,13 +505,14 @@ a{ color:inherit; text-decoration:none; }
 
 <!-- ══ 히어로 ══ -->
 <header class="hero wrap" id="hero">
-  <h1 class="hero__head">
-    <span class="line"><span>불편한 지점을 찾아</span></span>
-    <span class="line"><span>직접 만들어 고칩니다</span></span>
+  <h1 class="hero__head" lang="en" aria-label="Beyond the Mockup">
+    <span class="line"><span class="hero__a">BEYOND</span></span>
+    <span class="line line--b"><span class="hero__b">the Mockup<i class="caret" aria-hidden="true"></i></span></span>
   </h1>
-  <p class="hero__sub">
-    광고 대행사에서 1년 동안 랜딩페이지와 사내 견적서를 기획부터 퍼블리싱까지 맡았습니다. <b>UI/UX 디자이너 송유진입니다.</b>
-  </p>
+  <div class="hero__foot">
+    <p class="hero__ko" lang="ko">시안 너머의 완성도</p>
+    <p class="hero__meta">송유진<span>/</span>UI/UX Designer<span>/</span>2026</p>
+  </div>
 </header>
 
 <!-- ══ 작업물 ══ -->
